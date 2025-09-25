@@ -1,5 +1,5 @@
 import { PaginationParams } from '@src/core/repositories/pagination-params'
-import { Dre } from '../entities/Dre'
+import { Dre } from '../entities/dre';
 
 export abstract class DreRepository {
   abstract create(data: Dre): Promise<void>
