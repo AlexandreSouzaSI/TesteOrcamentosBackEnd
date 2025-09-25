@@ -25,6 +25,7 @@ type FetchRecentDespesasUseCaseResponse = Either<
       valorUnitario?: number | null
       categoriaId?: string | null
       dataVencimento?: string | null
+      produtoId?: string | null
       createdAt: Date
       updatedAt?: Date | null
       userId: UniqueEntityId

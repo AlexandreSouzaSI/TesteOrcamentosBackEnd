@@ -34,32 +34,34 @@ describe('Edit categoria (E2E)', () => {
   test('[PUT] /category/:id', async () => {
     const categoria = await categoriaFactory.makePrismaCategoria({
       name: 'Sorvete',
+      produto: 'sim', // Inicialmente o produto é 'true'
     })
 
     const user = await userFactory.makePrismaUser()
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
+    // Realiza a atualização da categoria
     const response = await request(app.getHttpServer())
       .put(`/category/${categoria.id}`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
         name: 'Sorvete atualizado',
+        produto: 'false', // Atualiza para 'false'
       })
 
     expect(response.statusCode).toBe(204)
 
-    const categoriaOnDatabase = await prisma.categoria.findFirst({
-      where: {
-        name: 'Sorvete atualizado',
-      },
+    // Verifica a atualização no banco de dados
+    const categoriaOnDatabase = await prisma.categoria.findUnique({
+      where: { id: categoria.id.toString() },
     })
 
     expect(categoriaOnDatabase).toBeTruthy()
-
     expect(categoriaOnDatabase).toEqual(
       expect.objectContaining({
-        id: categoriaOnDatabase?.id.toString(),
+        name: 'Sorvete atualizado',
+        produto: 'false',
       }),
     )
   })

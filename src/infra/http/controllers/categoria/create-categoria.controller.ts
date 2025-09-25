@@ -14,6 +14,7 @@ import { CategoriaAlreadyExistsError } from '@src/domain/use-cases/errors/catego
 
 const createCategoriaBodySchema = z.object({
   name: z.string(),
+  produto: z.string().optional(),
 })
 
 type CreateCategoriaBodySchema = z.infer<typeof createCategoriaBodySchema>
@@ -26,10 +27,11 @@ export class CreateCategoriaController {
   @HttpCode(201)
   @UsePipes(new ZodValidationPipe(createCategoriaBodySchema))
   async handle(@Body() body: CreateCategoriaBodySchema) {
-    const { name } = body
+    const { name, produto } = body
 
     const result = await this.createCategoria.execute({
       name,
+      produto,
     })
 
     if (result.isLeft()) {

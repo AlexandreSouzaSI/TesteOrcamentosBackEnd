@@ -16,10 +16,14 @@ import { UniqueEntityId } from 'src/core/entities/unique-entity-id'
 const editDespesasBodySchema = z.object({
   name: z.string().optional(),
   data: z.string().optional(),
-  valor: z.number().optional(),
+  valor: z.coerce.number().optional(),
+  quantidade: z.coerce.number().optional(),
+  valorUnitario: z.coerce.number().optional(),
   dataVencimento: z.string().optional(),
   status: z.string().optional(),
   categoriaId: z.string().optional(),
+  produtoId: z.string().optional(),
+  custoId: z.string().optional(),
 })
 
 const bodyValidationPipe = new ZodValidationPipe(editDespesasBodySchema)
@@ -28,7 +32,7 @@ type EditDespesasBodySchema = z.infer<typeof editDespesasBodySchema>
 
 @Controller('/despesa/:id')
 export class EditDespesasController {
-  constructor(private editDespesas: EditDespesasUseCase) {}
+  constructor(private editDespesas: EditDespesasUseCase) { }
 
   @Put()
   @HttpCode(204)
@@ -37,7 +41,18 @@ export class EditDespesasController {
     @Param('id') despesaId: string,
     @CurrentUser() user: UserPayload,
   ) {
-    const { name, valor, data, dataVencimento, status, categoriaId } = body
+    const {
+      name,
+      valor,
+      data,
+      dataVencimento,
+      status,
+      quantidade,
+      valorUnitario,
+      categoriaId,
+      produtoId,
+      custoId,
+    } = body
     const userValidate = user.sub
 
     const result = await this.editDespesas.execute({
@@ -47,8 +62,12 @@ export class EditDespesasController {
       status,
       dataVencimento,
       despesaId,
+      quantidade,
+      valorUnitario,
       userId: new UniqueEntityId(userValidate),
       categoriaId,
+      produtoId,
+      custoId,
     })
 
     if (result.isLeft()) {

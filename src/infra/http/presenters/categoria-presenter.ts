@@ -5,6 +5,7 @@ export class CategoriaPresenter {
     return {
       id: categoria.id.toString(),
       name: categoria.name,
+      produto: categoria.produto,
     }
   }
 

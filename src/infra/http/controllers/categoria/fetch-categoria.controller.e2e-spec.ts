@@ -46,7 +46,7 @@ describe('Fetch categoria (E2E)', () => {
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
-      user: expect.objectContaining({ name: 'Salgados' }),
+      categoria: expect.objectContaining({ name: 'Salgados' }),
     })
   })
 })

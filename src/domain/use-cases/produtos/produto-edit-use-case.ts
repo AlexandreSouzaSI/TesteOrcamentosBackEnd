@@ -12,6 +12,7 @@ interface EditProdutoUseCaseRequest {
   quantidadeEstoque?: number
   quantidadeMinima?: number
   categoriaId?: string
+  isDirectUpdate?: boolean
 }
 
 type EditProdutoUseCaseResponse = Either<
@@ -31,6 +32,7 @@ export class EditProdutoUseCase {
     quantidadeEstoque,
     quantidadeMinima,
     categoriaId,
+    isDirectUpdate = false,
   }: EditProdutoUseCaseRequest): Promise<EditProdutoUseCaseResponse> {
     const produto = await this.produtoRepository.findById(id)
 
@@ -43,7 +45,9 @@ export class EditProdutoUseCase {
     }
 
     if (quantidadeEstoque) {
-      produto.quantidadeEstoque = quantidadeEstoque
+      produto.quantidadeEstoque = isDirectUpdate
+        ? (produto.quantidadeEstoque ?? 0) + quantidadeEstoque
+        : quantidadeEstoque
     }
 
     if (quantidadeMinima) {

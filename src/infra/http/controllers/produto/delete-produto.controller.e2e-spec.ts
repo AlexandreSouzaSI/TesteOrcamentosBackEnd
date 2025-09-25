@@ -31,14 +31,14 @@ describe('Delete produto (E2E)', () => {
     await app.init()
   })
 
-  test('[DELETE] /product/:id', async () => {
+  test('[DELETE] /produtos/:id', async () => {
     const produto = await produtoFactory.makePrismaProduto()
     const user = await userFactory.makePrismaUser()
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
     const response = await request(app.getHttpServer())
-      .delete(`/product/${produto.id}`)
+      .delete(`/produtos/${produto.id}`)
       .set('Authorization', `Bearer ${accessToken}`)
 
     expect(response.statusCode).toBe(204)

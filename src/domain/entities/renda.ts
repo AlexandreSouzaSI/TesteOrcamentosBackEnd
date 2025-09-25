@@ -12,6 +12,8 @@ export interface RendaProps {
   updatedAt?: Date | null
   userId: UniqueEntityId
   categoriaId?: string | null
+  custoId?: string | null
+  produtoId?: string | null
   categoria?: Categoria
 }
 
@@ -46,6 +48,14 @@ export class Renda extends Entity<RendaProps> {
 
   get categoriaId() {
     return this.props.categoriaId ?? null
+  }
+
+  get custoId() {
+    return this.props.custoId ?? null
+  }
+
+  get produtoId() {
+    return this.props.produtoId ?? null
   }
 
   get categoria() {
@@ -86,6 +96,16 @@ export class Renda extends Entity<RendaProps> {
     this.touch()
   }
 
+  set custoId(custoId: string | null) {
+    this.props.custoId = custoId
+    this.touch()
+  }
+
+  set produtoId(produtoId: string | null) {
+    this.props.produtoId = produtoId
+    this.touch()
+  }
+
   set categoria(categoria: Categoria | undefined) {
     this.props.categoria = categoria
     this.touch()
@@ -101,6 +121,8 @@ export class Renda extends Entity<RendaProps> {
         createdAt: props.createdAt ?? new Date(),
         status: props.status ? props.status : 'pendente',
         categoriaId: props.categoriaId ? props.categoriaId : null,
+        custoId: props.custoId ? props.custoId : null,
+        produtoId: props.produtoId ? props.produtoId : null,
         categoria: props.categoria ? props.categoria : undefined,
         data: props.data ?? null,
       },

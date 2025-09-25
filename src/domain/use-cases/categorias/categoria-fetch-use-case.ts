@@ -3,6 +3,7 @@ import { right } from './../../../core/either'
 import { Injectable } from '@nestjs/common'
 import { CategoriaRepository } from '@src/domain/repositories/categoria-repository'
 import { Either } from 'src/core/either'
+import { Dre } from '@src/domain/entities/dre'
 
 interface FetchRecentCategoriaUseCaseRequest {
   pageIndex: number
@@ -15,6 +16,8 @@ type FetchCategoriaUseCaseResponse = Either<
     categoria: {
       id: UniqueEntityId
       name: string
+      produto?: string | null
+      dre?: Dre | null
     }[]
     meta: {
       pageIndex: number

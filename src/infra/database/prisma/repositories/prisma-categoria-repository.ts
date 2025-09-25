@@ -62,6 +62,11 @@ export class PrismaCategoriaRepository implements CategoriaRepository {
       where: {
         ...(name && { name: { contains: name, mode: 'insensitive' } }),
       },
+      select: {
+        id: true,
+        name: true,
+        produto: true, // Inclua explicitamente o campo 'produto'
+      },
     })
 
     return categoria.map((categoria) =>
@@ -76,7 +81,10 @@ export class PrismaCategoriaRepository implements CategoriaRepository {
       where: {
         id: data.id,
       },
-      data,
+      data: {
+        name: data.name,
+        produto: data.produto,
+      },
     })
   }
 

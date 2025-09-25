@@ -1,15 +1,15 @@
 import { InMemoryProdutoRepository } from '@test/repositories/in-memory-produto-repository'
 import { UniqueEntityId } from 'src/core/entities/unique-entity-id'
-import { FetchProdutoUseCase } from './produto-fetch-use-case'
 import { makeProduto } from '@test/factories/make-produto'
+import { GetByIdProdutoUseCase } from './produto-get-by-id-use-case'
 
 let inMemoryProdutoRepository: InMemoryProdutoRepository
-let sut: FetchProdutoUseCase
+let sut: GetByIdProdutoUseCase
 
 describe('Get by id produto', () => {
   beforeEach(() => {
     inMemoryProdutoRepository = new InMemoryProdutoRepository()
-    sut = new FetchProdutoUseCase(inMemoryProdutoRepository)
+    sut = new GetByIdProdutoUseCase(inMemoryProdutoRepository)
   })
 
   it('should be able to get by id a produto', async () => {

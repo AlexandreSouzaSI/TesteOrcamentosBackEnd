@@ -7,6 +7,7 @@ export class PrismaCategoriaMapper {
     return Categoria.create(
       {
         name: raw.name,
+        produto: raw.produto,
       },
       new UniqueEntityId(raw.id),
     )
@@ -16,6 +17,7 @@ export class PrismaCategoriaMapper {
     return {
       id: categoria.id.toString(),
       name: categoria.name,
+      produto: categoria.produto,
     }
   }
 }

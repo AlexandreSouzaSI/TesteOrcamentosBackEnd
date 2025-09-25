@@ -20,8 +20,8 @@ describe('Create Produto (E2E)', () => {
     await app.init()
   })
 
-  test('[POST] /product', async () => {
-    const response = await request(app.getHttpServer()).post('/product').send({
+  test('[POST] /produtos', async () => {
+    const response = await request(app.getHttpServer()).post('/produtos').send({
       name: 'Spaten',
       quantidadeMinima: 5,
       quantidadeEstoque: 12,

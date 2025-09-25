@@ -9,10 +9,13 @@ export class DespesasPresenter {
       valor: despesa.valor,
       status: despesa.status,
       dataVencimento: despesa.dataVencimento,
+      quantidade: despesa.quantidade,
+      valorUnitario: despesa.valorUnitario,
       createdAt: despesa.createdAt,
       updatedAt: despesa.updatedAt,
       userId: despesa.userId.toString(),
       categoria: despesa.categoria,
+      produtoId: despesa.produtoId,
     }
   }
 }

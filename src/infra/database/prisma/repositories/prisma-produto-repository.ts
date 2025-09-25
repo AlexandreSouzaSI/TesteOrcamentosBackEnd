@@ -7,7 +7,7 @@ import { PaginationParams } from '@src/core/repositories/pagination-params'
 
 @Injectable()
 export class PrismaProdutoRepository implements ProdutoRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(produto: Produto) {
     const data = PrismaProdutoMapper.toPrisma(produto)
@@ -17,7 +17,8 @@ export class PrismaProdutoRepository implements ProdutoRepository {
     })
   }
 
-  async findById(id: string) {
+  async findById(id?: string) {
+    console.log('id: ', id)
     const produto = await this.prisma.produto.findUnique({
       where: {
         id,

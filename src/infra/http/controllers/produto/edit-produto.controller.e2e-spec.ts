@@ -31,7 +31,7 @@ describe('Edit produto (E2E)', () => {
     await app.init()
   })
 
-  test('[PUT] /product/:id', async () => {
+  test('[PUT] /produtos/:id', async () => {
     const produto = await produtoFactory.makePrismaProduto({
       name: 'Spaten',
     })
@@ -41,7 +41,7 @@ describe('Edit produto (E2E)', () => {
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
     const response = await request(app.getHttpServer())
-      .put(`/product/${produto.id}`)
+      .put(`/produtos/${produto.id}`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
         name: 'Spaten atualizado',

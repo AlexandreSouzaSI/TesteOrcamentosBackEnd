@@ -13,13 +13,14 @@ import { EditCategoriaUseCase } from '@src/domain/use-cases/categorias/categoria
 
 const editCategoriaBodySchema = z.object({
   name: z.string().optional(),
+  produto: z.string().optional(),
 })
 
 const bodyValidationPipe = new ZodValidationPipe(editCategoriaBodySchema)
 
 type EditCategoriaBodySchema = z.infer<typeof editCategoriaBodySchema>
 
-@Controller('/category/:id')
+@Controller('/categoryEdit/:id')
 export class EditCategoriaController {
   constructor(private editCategoria: EditCategoriaUseCase) {}
 
@@ -29,12 +30,18 @@ export class EditCategoriaController {
     @Body(bodyValidationPipe) body: EditCategoriaBodySchema,
     @Param('id') categoriaId: string,
   ) {
-    const { name } = body
+    console.log('aqui', categoriaId)
+    const { name, produto } = body
+
+    console.log('Aqui body: ')
 
     const result = await this.editCategoria.execute({
       id: categoriaId,
       name,
+      produto,
     })
+
+    console.log('result: ', result.value)
 
     if (result.isLeft()) {
       throw new BadRequestException()

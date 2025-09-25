@@ -16,6 +16,7 @@ export interface DespesasProps {
   categoriaId?: string | null
   userId: UniqueEntityId
   produtoId?: string | null
+  custoId?: string | null
   categoria?: Categoria
 }
 
@@ -66,6 +67,10 @@ export class Despesas extends Entity<DespesasProps> {
 
   get produtoId() {
     return this.props.produtoId ?? null
+  }
+
+  get custoId() {
+    return this.props.custoId ?? null
   }
 
   get categoria() {
@@ -121,6 +126,11 @@ export class Despesas extends Entity<DespesasProps> {
     this.touch()
   }
 
+  set custoId(custoId: string | null) {
+    this.props.custoId = custoId
+    this.touch()
+  }
+
   set categoria(categoria: Categoria | undefined) {
     this.props.categoria = categoria
     this.touch()
@@ -146,6 +156,7 @@ export class Despesas extends Entity<DespesasProps> {
           data: props.data ?? null,
           categoriaId: props.categoriaId ? props.categoriaId : null,
           produtoId: props.produtoId ? props.produtoId : null,
+          custoId: props.custoId ? props.custoId : null,
           categoria: props.categoria ? props.categoria : undefined,
           valor: calculatedValor,
         },
@@ -162,6 +173,8 @@ export class Despesas extends Entity<DespesasProps> {
         status: props.status ? props.status : 'pendente',
         data: props.data ?? null,
         categoriaId: props.categoriaId ? props.categoriaId : null,
+        produtoId: props.produtoId ? props.produtoId : null,
+        custoId: props.custoId ? props.custoId : null,
         categoria: props.categoria ? props.categoria : undefined,
         valor: props.valor,
       },

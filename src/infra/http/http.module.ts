@@ -67,6 +67,30 @@ import { GetByIdCategoriaController } from './controllers/categoria/get-by-id-ca
 import { GetByIdCategoriaUseCase } from '@src/domain/use-cases/categorias/categoria-get-by-id-use-case'
 import { GetByIdProdutoUseCase } from '@src/domain/use-cases/produtos/produto-get-by-id-use-case'
 import { GetByIdProdutoController } from './controllers/produto/get-by-id-produto.controller'
+import { CreateCustoController } from './controllers/custo/create-custo.controller'
+import { DeleteCustoController } from './controllers/custo/delete-custo.controller'
+import { EditCustoController } from './controllers/custo/edit-custo.controller'
+import { FetchCustoController } from './controllers/custo/fetch-custo.controller'
+import { GetByIdCustoController } from './controllers/custo/get-by-id-custo.controller'
+import { GetByNameCustoController } from './controllers/custo/get-by-name-custo.controller'
+import { CreateCustoUseCase } from '@src/domain/use-cases/custos/custo-create-use-case'
+import { DeleteCustoUseCase } from '@src/domain/use-cases/custos/custo-delete-use-case'
+import { EditCustoUseCase } from '@src/domain/use-cases/custos/custo-edit-use-case'
+import { FetchCustoUseCase } from '@src/domain/use-cases/custos/custo-fetch-use-case'
+import { GetByIdCustoUseCase } from '@src/domain/use-cases/custos/custo-get-by-id-use-case'
+import { GetByNameCustoUseCase } from '@src/domain/use-cases/custos/custo-get-by-name-use-case'
+import { CreateDreController } from './controllers/dre/create-dre.controller'
+import { DeleteDreController } from './controllers/dre/delete-dre.controller'
+import { EditDreController } from './controllers/dre/edit-dre.controller'
+import { FetchDreController } from './controllers/dre/fetch-dre.controller'
+import { GetByIdDreController } from './controllers/dre/get-by-id-dre.controller'
+import { GetByNameDreController } from './controllers/dre/get-by-name-dre.controller'
+import { CreateDreUseCase } from '@src/domain/use-cases/dre/dre-create-use-case'
+import { DeleteDreUseCase } from '@src/domain/use-cases/dre/dre-delete-use-case'
+import { EditDreUseCase } from '@src/domain/use-cases/dre/dre-edit-use-case'
+import { FetchDreUseCase } from '@src/domain/use-cases/dre/dre-fetch-use-case'
+import { GetByIdDreUseCase } from '@src/domain/use-cases/dre/dre-get-by-id-use-case'
+import { GetByNameDreUseCase } from '@src/domain/use-cases/dre/dre-get-by-name-use-case'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -103,6 +127,18 @@ import { GetByIdProdutoController } from './controllers/produto/get-by-id-produt
     GetByIdAccountController,
     GetByIdCategoriaController,
     GetByIdProdutoController,
+    CreateCustoController,
+    DeleteCustoController,
+    EditCustoController,
+    FetchCustoController,
+    GetByIdCustoController,
+    GetByNameCustoController,
+    CreateDreController,
+    DeleteDreController,
+    EditDreController,
+    FetchDreController,
+    GetByIdDreController,
+    GetByNameDreController,
   ],
   providers: [
     PrismaClient,
@@ -139,6 +175,18 @@ import { GetByIdProdutoController } from './controllers/produto/get-by-id-produt
     GetByIdUserUseCase,
     GetByIdCategoriaUseCase,
     GetByIdProdutoUseCase,
+    CreateCustoUseCase,
+    DeleteCustoUseCase,
+    EditCustoUseCase,
+    FetchCustoUseCase,
+    GetByIdCustoUseCase,
+    GetByNameCustoUseCase,
+    CreateDreUseCase,
+    DeleteDreUseCase,
+    EditDreUseCase,
+    FetchDreUseCase,
+    GetByIdDreUseCase,
+    GetByNameDreUseCase,
   ],
 })
 export class HttpModule {}

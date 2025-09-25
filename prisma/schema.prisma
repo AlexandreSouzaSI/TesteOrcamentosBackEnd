@@ -38,10 +38,12 @@ model Despesas {
   userId         String    @map("user_id")
   categoriaId    String?   @map("categoria_id")
   produtoId      String?   @map("produto_id")
+  custoId        String?   @map("custo_id")
 
   user      User       @relation(fields: [userId], references: [id])
   categoria Categoria? @relation(fields: [categoriaId], references: [id])
   produto   Produto?   @relation(fields: [produtoId], references: [id])
+  Custo     Custo?     @relation(fields: [custoId], references: [id])
 
   @@map("despesas")
 }
@@ -49,11 +51,25 @@ model Despesas {
 model Categoria {
   id       String     @id @default(uuid())
   name     String
+  produto  String?
   despesas Despesas[]
   produtos Produto[]
   rendas   Renda[]
+  Custo    Custo[]
+  Dre      Dre[]
 
   @@map("categorias")
+}
+
+model Dre {
+  id          String  @id @default(uuid())
+  name        String
+  descricao   String?
+  categoriaId String?
+
+  categoria Categoria? @relation(fields: [categoriaId], references: [id])
+
+  @@map("dre")
 }
 
 model Produto {
@@ -67,8 +83,24 @@ model Produto {
 
   categoria Categoria? @relation(fields: [categoriaId], references: [id])
   despesas  Despesas[]
+  Renda     Renda[]
 
   @@map("produtos")
+}
+
+model Custo {
+  id          String    @id @default(uuid())
+  name        String
+  descricao   String?
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime? @updatedAt @map("updated_at")
+  categoriaId String?
+
+  categoria Categoria? @relation(fields: [categoriaId], references: [id])
+  despesas  Despesas[]
+  Renda     Renda[]
+
+  @@map("custos")
 }
 
 model Renda {
@@ -80,10 +112,14 @@ model Renda {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime? @updatedAt @map("updated_at")
   userId      String    @map("user_id")
-  categoriaId String?
+  categoriaId String?   @map("categoria_id")
+  produtoId   String?   @map("produto_id")
+  custoId     String?   @map("custo_id")
 
   user      User       @relation(fields: [userId], references: [id])
   categoria Categoria? @relation(fields: [categoriaId], references: [id])
+  produto   Produto?   @relation(fields: [produtoId], references: [id])
+  custo     Custo?     @relation(fields: [custoId], references: [id])
 
   @@map("rendas")
 }

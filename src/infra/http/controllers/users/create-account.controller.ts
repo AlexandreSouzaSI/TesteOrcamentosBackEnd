@@ -31,6 +31,7 @@ export class CreateAccountController {
   @UsePipes(new ZodValidationPipe(createAccountBodySchema))
   async handle(@Body() body: CreateAccountBodySchema) {
     const { name, email, password } = body
+    console.log('aqui: ', name, email, password)
 
     const result = await this.createAccount.execute({
       name,

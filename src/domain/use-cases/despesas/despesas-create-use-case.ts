@@ -15,6 +15,7 @@ interface CreateDespesasUseCaseRequest {
   categoriaId?: string | null
   dataVencimento?: string | null
   produtoId?: string | null
+  custoId?: string | null
 }
 
 type CreateDespesasUseCaseResponse = Either<
@@ -26,7 +27,7 @@ type CreateDespesasUseCaseResponse = Either<
 
 @Injectable()
 export class CreateDespesasUseCase {
-  constructor(private despesaRepository: DespesasRepository) {}
+  constructor(private despesaRepository: DespesasRepository) { }
 
   async execute({
     name,
@@ -39,6 +40,7 @@ export class CreateDespesasUseCase {
     dataVencimento,
     userId,
     produtoId,
+    custoId,
   }: CreateDespesasUseCaseRequest): Promise<CreateDespesasUseCaseResponse> {
     const despesa = Despesas.create({
       userId,
@@ -51,7 +53,10 @@ export class CreateDespesasUseCase {
       categoriaId,
       dataVencimento,
       produtoId,
+      custoId
     })
+
+    console.log("Aqui: ", despesa)
 
     await this.despesaRepository.create(despesa)
 

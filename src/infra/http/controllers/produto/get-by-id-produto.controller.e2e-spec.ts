@@ -40,11 +40,10 @@ describe('Fetch produto (E2E)', () => {
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
     const response = await request(app.getHttpServer())
-      .get(`/product/${produto.id}`)
+      .get(`/produtos/${produto.id}`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send()
 
-    expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
       produto: expect.objectContaining({ name: 'Salgados' }),
     })

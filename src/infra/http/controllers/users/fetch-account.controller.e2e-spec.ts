@@ -39,15 +39,15 @@ describe('Fetch accounts (E2E)', () => {
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
-      value: {
-        users: expect.arrayContaining([
-          expect.objectContaining({
-            props: expect.objectContaining({
-              name: 'Alexandre Teste',
-            }),
-          }),
-        ]),
-      },
+      users: expect.arrayContaining([
+        expect.objectContaining({
+          id: expect.any(String),
+          name: 'Alexandre Teste',
+          email: expect.any(String),
+          rendas: expect.any(Array),
+          despesas: expect.any(Array),
+        }),
+      ]),
     })
   })
 })

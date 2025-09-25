@@ -42,6 +42,7 @@ export class FetchCategoriaController {
       categoria: categoria.map((r) => ({
         id: r.id.toString(),
         name: r.name,
+        produto: r.produto,
       })),
       meta: {
         pageIndex,

@@ -84,6 +84,7 @@ export class FetchRecentDespesasController {
         updatedAt: r.updatedAt,
         userId: r.userId.toString(),
         categoria: r.categoria?.name,
+        produtoId: r.produtoId,
       })),
       meta: {
         pageIndex,

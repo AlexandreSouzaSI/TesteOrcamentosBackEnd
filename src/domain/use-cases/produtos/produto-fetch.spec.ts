@@ -17,7 +17,11 @@ describe('Fetch a produto', () => {
       makeProduto({}, new UniqueEntityId('produto-1')),
     )
 
-    const produto = await sut.execute()
+    const produto = await sut.execute({
+      pageIndex: 0,
+      name: '',
+      categoriaId: '',
+    })
 
     expect(produto.isRight()).toBe(true)
   })

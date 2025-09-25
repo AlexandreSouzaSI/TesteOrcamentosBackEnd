@@ -12,6 +12,7 @@ export function makeCategoria(
   const categoria = Categoria.create(
     {
       name: faker.person.firstName(),
+      produto: faker.lorem.lines(),
       ...override,
     },
     id,

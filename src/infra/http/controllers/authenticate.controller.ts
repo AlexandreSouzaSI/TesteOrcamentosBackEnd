@@ -28,6 +28,7 @@ export class AuthenticateController {
   @UsePipes(new ZodValidationPipe(authenticateBodySchema))
   async handle(@Body() body: AuthenticateBodySchema) {
     const { email, password } = body
+    console.log('email', email)
 
     const result = await this.authenticateUser.execute({
       email,
