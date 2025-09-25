@@ -18,7 +18,8 @@ describe('Fetch a categoria', () => {
     )
 
     const categoria = await sut.execute({
-      categoriaId: 'categoria-1',
+      name: 'categoria-1',
+      pageIndex: 1
     })
 
     expect(categoria.isRight()).toBe(true)

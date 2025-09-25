@@ -3,14 +3,17 @@ import { makeUser } from 'test/factories/make-user'
 import { EditDespesasUseCase } from './despesas-edit-use-case'
 import { makeDespesa } from 'test/factories/make-despesa'
 import { InMemoryDespesasRepository } from '@test/repositories/in-memory-despesas-repository'
+import { InMemoryProdutoRepository } from '@test/repositories/in-memory-produto-repository'
 
 let inMemoryDespesasRepository: InMemoryDespesasRepository
+let inMemoryProdutoRepository: InMemoryProdutoRepository
 let sut: EditDespesasUseCase
 
 describe('Edit despesa', () => {
   beforeEach(() => {
     inMemoryDespesasRepository = new InMemoryDespesasRepository()
-    sut = new EditDespesasUseCase(inMemoryDespesasRepository)
+    inMemoryProdutoRepository = new InMemoryProdutoRepository()
+    sut = new EditDespesasUseCase(inMemoryDespesasRepository, inMemoryProdutoRepository)
   })
 
   it('should be able to edit a despesa', async () => {

@@ -17,9 +17,7 @@ describe('Get by id a user', () => {
       makeUser({}, new UniqueEntityId('user-1')),
     )
 
-    const user = await sut.execute({
-      userId: 'user-1',
-    })
+    const user = await sut.execute()
 
     expect(user.isRight()).toBe(true)
   })

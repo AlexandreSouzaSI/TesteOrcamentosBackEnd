@@ -54,7 +54,7 @@ export class InMemoryDespesasRepository implements DespesasRepository {
     }
 
     const totalSum = despesas.reduce((sum, despesa) => {
-      return new Decimal(sum).add(despesa.valor).toNumber()
+      return new Decimal(sum).add(despesa.valor!).toNumber()
     }, 0)
 
     return totalSum
