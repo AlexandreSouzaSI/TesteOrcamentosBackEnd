@@ -5,29 +5,18 @@ import { EnvService } from './env/env.service'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   const configService = app.get(EnvService)
-  const port = configService.get('PORT')
 
-  // Habilita CORS de forma dinâmica
+  const port = configService.get('PORT') || 3000
+  const origin = 'teste-orcamento-front-end-vq9n-l7u7pvp3u.vercel.app'
+
   app.enableCors({
-    origin: (incomingOrigin, callback) => {
-      // Lista de domínios permitidos
-      const allowedOrigins = [
-        'https://teste-orcamento-front-end-vq9n.vercel.app',
-        'https://seu-dominio-principal.vercel.app',
-      ]
-
-      // Se não tiver origin (por exemplo, requisições do Postman) ou estiver na lista, permite
-      if (!incomingOrigin || allowedOrigins.includes(incomingOrigin)) {
-        callback(null, true)
-      } else {
-        callback(new Error(`Origin ${incomingOrigin} not allowed by CORS`))
-      }
-    },
+    origin,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   })
 
-  console.log(`App listening on port ${port}`)
   await app.listen(port)
+  console.log(`App listening on port ${port} with frontend ${origin}`)
 }
 bootstrap()
+
