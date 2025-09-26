@@ -7,16 +7,22 @@ async function bootstrap() {
   const configService = app.get(EnvService)
 
   const port = configService.get('PORT') || 3000
-  const origin = 'teste-orcamento-front-end-vq9n-l7u7pvp3u.vercel.app'
 
   app.enableCors({
-    origin,
+    origin: (incomingOrigin, callback) => {
+      if (!incomingOrigin) return callback(null, true) // permite Postman ou server-side requests
+      // permite qualquer subdomínio do Vercel
+      if (/\.vercel\.app$/.test(incomingOrigin)) {
+        callback(null, true)
+      } else {
+        callback(new Error(`Origin ${incomingOrigin} not allowed by CORS`))
+      }
+    },
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   })
 
   await app.listen(port)
-  console.log(`App listening on port ${port} with frontend ${origin}`)
+  console.log(`App listening on port ${port}`)
 }
 bootstrap()
-
